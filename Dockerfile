@@ -18,11 +18,10 @@ RUN apk update && \
         ca-certificates \
         python \
         wget \
-        tar && \
-    update-ca-certificates
+        tar
 
 RUN \
-    wget https://github.com/SickRage/SickRage/archive/master.tar.gz && \
+    wget --quiet https://github.com/SickRage/SickRage/archive/master.tar.gz && \
     mkdir -p /app/sickrage && \
     tar -C /app/sickrage --strip-components=1 -xzvf master.tar.gz ./SickRage-master && \
     rm master.tar.gz
