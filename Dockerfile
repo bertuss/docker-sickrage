@@ -23,7 +23,7 @@ RUN apk update && \
 RUN \
     wget --quiet https://github.com/SickRage/SickRage/archive/master.tar.gz && \
     mkdir -p /app/sickrage && \
-    tar -C /app/sickrage --strip-components=1 -xzvf master.tar.gz ./SickRage-master && \
+    tar -C /app/sickrage --strip-components=1 -xzvf master.tar.gz 'SickRage-master' && \
     rm master.tar.gz
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
