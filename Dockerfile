@@ -15,10 +15,17 @@ RUN sed -i -e "s|web_username = username|web_username = ${USERNAME}|g" -e "s|web
 # install packages
 RUN apk update && \
     apk add --no-cache \
+        ca-certificates \
         python \
-        git
+        wget \
+        tar && \
+    update-ca-certificates
 
-RUN git clone --depth=1 https://github.com/SickRage/SickRage.git /app/sickrage
+RUN \
+    wget https://github.com/SickRage/SickRage/archive/master.tar.gz && \
+    mkdir -p /app/sickrage && \
+    tar -C /app/sickrage --strip-components=1 -xzvf master.tar.gz ./SickRage-master && \
+    rm master.tar.gz
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod u+x  /usr/bin/entrypoint.sh
@@ -33,6 +40,4 @@ CMD python /app/sickrage/SickBeard.py \
     --nolaunch \
     --port ${PORT} \
     --datadir ${DATADIR} \
-    --config ${CONFIGFILE} \
-    --pidfile /var/run/sickbeard.pid \
-    --force-update
+    --config ${CONFIGFILE}
