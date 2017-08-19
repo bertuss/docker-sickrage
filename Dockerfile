@@ -10,7 +10,7 @@ ENV CONFIGFILE /config/config.ini
 
 COPY config/config.ini /config/config.ini
 
-RUN sed -i -e "s|web_username = username|web_username = ${USERNAME}|g" -e "s|web_password = password|web_username = ${PASSWORD}|g" /config/config.ini
+RUN sed -i -e "s|web_username = \"\"|web_username = \"${USERNAME}\"|g" -e "s|web_password = \"password\"|web_username = \"${PASSWORD}\"|g" /config/config.ini
 
 # install packages
 RUN apk update && \
