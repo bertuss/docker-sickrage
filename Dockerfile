@@ -35,5 +35,4 @@ CMD python /app/sickrage/SickBeard.py \
     --datadir ${DATADIR} \
     --config ${CONFIGFILE} \
     --pidfile /var/run/sickbeard.pid \
-    --daemon \
     --force-update
